@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style_selecionar.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <title>Selecionar Notas</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Selecionar Notas na Partitura</h1>
+        <div class="warning-message">
+            Selecione apenas as notas musicais! Se não irá funcionar a mudança de tom. 
+            Caso tenha selecionado errado aperte a tecla 'CTRL' para reverter a seleção.
+        </div>
+        <canvas id="canvas"></canvas>
+        <form id="roiForm" method="post" action="{% url 'selecionar_notas' %}">
+            {% csrf_token %}
+            <input type="hidden" id="roisInput" name="rois" value="">
+            <input type="hidden" name="imagem_url" value="{{ imagem_url }}"> <!-- Campo oculto para a imagem -->
+            <button type="submit">Confirmar Seleção</button>
+        </form>
+    </div>
+    <script>
+// Carrega a imagem no canvas
+const imgUrl = "{{ imagem_url }}";
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+// Variáveis para a seleção de ROIs
+let rois = [];
+let roiImages = []; // Array para armazenar as imagens dos ROIs
+let startX, startY, isSelecting = false;
+
+// Carrega e desenha a imagem no canvas
+const img = new Image();
+img.src = imgUrl;
+img.onload = function() {
+    canvas.width = img.width; // Tamanho original da imagem
+    canvas.height = img.height; // Tamanho original da imagem
+    ctx.drawImage(img, 0, 0);
+};
+
+// Evento de mouse para começar a seleção
+canvas.addEventListener("mousedown", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    startX = e.clientX - rect.left;
+    startY = e.clientY - rect.top;
+    isSelecting = true;
+});
+
+// Evento de mouse para desenhar o ROI durante a seleção
+canvas.addEventListener("mousemove", (e) => {
+    if (isSelecting) {
+        const rect = canvas.getBoundingClientRect();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0); // Redesenha a imagem
+
+        const currentX = e.clientX - rect.left;
+        const currentY = e.clientY - rect.top;
+
+        // Desenha todos os ROIs
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+        rois.forEach((roi) => {
+            ctx.strokeRect(roi.x, roi.y, roi.width, roi.height);
+        });
+
+        // Desenha o novo ROI sendo selecionado
+        ctx.strokeStyle = "red"; // Cor diferente para o novo ROI
+        ctx.strokeRect(startX, startY, currentX - startX, currentY - startY);
+    }
+});
+
+// Evento de mouse para finalizar o ROI
+canvas.addEventListener("mouseup", (e) => {
+    isSelecting = false;
+    const rect = canvas.getBoundingClientRect();
+    const x = startX;
+    const y = startY;
+    const width = e.clientX - rect.left - startX;
+    const height = e.clientY - rect.top - startY;
+
+    // Adiciona o ROI à lista
+    if (width > 0 && height > 0) { // Verifica se o ROI tem dimensões válidas
+        rois.push({ x, y, width, height });
+        console.log("ROI adicionado:", { x, y, width, height });
+
+        // Captura a imagem da área selecionada como base64
+        const roiImage = ctx.getImageData(x, y, width, height);
+        const roiCanvas = document.createElement('canvas');
+        roiCanvas.width = width;
+        roiCanvas.height = height;
+        const roiCtx = roiCanvas.getContext('2d');
+        roiCtx.putImageData(roiImage, 0, 0);
+        const roiImageBase64 = roiCanvas.toDataURL("image/png");
+
+        // Armazena a imagem base64 junto com as coordenadas
+        rois[rois.length - 1].image = roiImageBase64;
+    }
+
+    // Redesenha a imagem e todos os ROIs
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0);
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 2;
+    rois.forEach((roi) => {
+        ctx.strokeRect(roi.x, roi.y, roi.width, roi.height);
+    });
+});
+
+// Evento para retroceder a última seleção
+window.addEventListener("keydown", (e) => {
+    if (e.ctrlKey) { // Verifica se a tecla CTRL está pressionada
+        rois.pop(); // Remove a última seleção
+        roiImages.pop(); // Remove a imagem correspondente
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+        rois.forEach((roi) => {
+            ctx.strokeRect(roi.x, roi.y, roi.width, roi.height);
+        });
+    }
+});
+
+// Verifica a lista de ROIs antes de enviar o formulário
+document.getElementById("roiForm").addEventListener("submit", (e) => {
+    const roisToSend = rois.map(roi => ({
+        x: roi.x,
+        y: roi.y,
+        width: roi.width,
+        height: roi.height,
+        image: roi.image // Inclui a imagem base64
+    }));
+    
+    document.getElementById("roisInput").value = JSON.stringify(roisToSend);
+    console.log("Dados do formulário a serem enviados:", document.getElementById("roisInput").value);
+
+    // Agora permita o envio do formulário
+    // e.preventDefault(); // REMOVA ou comente esta linha
+});
+    </script>
+</body>
+</html>

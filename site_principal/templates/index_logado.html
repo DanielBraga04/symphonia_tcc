@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symphonia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style_index2.css' %}">
+</head>
+<body>
+
+    <header class="header">
+        <a href="" class="logo"><img src="{% static 'img/logo_sem_fundo.png' %}" alt=""></a>
+
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class="uil uil-bars" id="menu-icon"></i>
+            <i class="uil uil-times" id="close-icon"></i>
+        </label>
+
+        <nav class="navbar">
+            <a href="" class="active">Início</a>
+            <a href="{% url 'sobre-nos_logado' %}">Sobre Nós</a>
+            <a href="{% url 'carregarbanco_logado' %}">Biblioteca</a>
+            <a href="{% url 'perfil' %}">Minha Conta</a>
+        </nav>
+
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <div class="main-content">
+            <div class="text-section">
+                <h1>Explore Sua <span>MÚSICA</span></h1>
+                <p>Com nosso software intuitivo de reconhecimento de partituras, você pode facilmente digitalizar partituras manuscritas. Simplificamos o processo de criação e edição de partituras, permitindo que você concentre-se na expressão musical. Experimente agora e descubra como tornar a música mais acessível e envolvente!</p>
+                <button class="button-experiment"><a href="{% url 'carregarbanco' %}" class="experiment-a">EXPERIMENTE AGORA</a></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ícones das redes sociais -->
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <!-- ===== Icon Head ==== -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="{% static 'css/style_login2.css' %}" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <a href="{% url 'home' %}"><i class="uil uil-times"></i></a>
+      <div class="forms">
+        <div class="form login">
+          <span class="title">Login</span>
+          <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            {% if messages %}
+            {% for message in messages %}
+              <div class="error-message">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+            <div class="input-field">
+              <input type="text" name="email" placeholder="Digite seu email ou username" required />
+              <i class="uil uil-envelope icon"></i>
+            </div>
+            <div class="input-field">
+              <input type="password" class="password" placeholder="Digite sua senha" name="password" required />
+              <i class="uil uil-lock icon"></i>
+              <i class="uil uil-eye-slash showHidePw"></i>
+            </div>
+            <div class="input-field button">
+              <input type="submit" value="Entrar" />
+            </div>
+          </form>
+          <div class="login-signup">
+            <span class="text"
+              >Não tem conta?
+              <a href="{% url 'cadastro' %}" class="text signup-link">Cadastre-se</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/script_login_cadastro.js' %}"></script>
+  </body>
+</html>

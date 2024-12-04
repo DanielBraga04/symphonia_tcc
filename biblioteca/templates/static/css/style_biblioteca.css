@@ -1,0 +1,340 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background-color: #EAEAEA;
+}
+
+.header{
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1.3rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.header img{
+    width: 150px
+}
+
+.navbar a{
+    font-size: 1.15rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 2.5rem;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+
+.navbar a.active{
+    background-color: #333; /* Fundo preto para o item ativo */
+    color: #fff;
+}
+
+.navbar a:hover{
+    background-color: #333; /* Fundo preto para o item ativo */
+    color: #fff;
+}
+
+.icons{
+    position: absolute;
+    right: 5%;
+    font-size: 2.6rem;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display: none;
+}
+
+/* Container principal da biblioteca */
+.biblioteca-container {
+    display: flex;
+    margin-top: -10px; /* para evitar sobreposição do header */
+    padding: 2rem;
+}
+
+/* Estilo do menu de filtros */
+.filtros {
+    width: 26%;
+    background-color: #f4f4f4;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-right: 1rem;
+    height: 400px; /* Altura fixa para o container dos filtros */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical */
+}
+
+.filtros h2 {
+    display: inline-block; /* Faz o título ter apenas o tamanho necessário para o texto */
+    position: relative; /* Necessário para posicionar a linha embaixo */
+    padding-bottom: 10px; /* Espaço entre o título e a linha */
+}
+
+.filtros h2::after {
+    content: ''; 
+    position: absolute; 
+    bottom: 10px; 
+    left: 0; 
+    height: 3px;
+    width: 30px;
+    background-color: #FFC107; 
+    border-radius: 25px;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-container input[type="text"] {
+    width: 100%;
+    padding: 0.5rem 2rem 0.5rem 0.5rem; /* Espaço para o ícone na direita */
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.input-container i {
+    position: absolute;
+    right: 0.7rem; /* Ajuste de posicionamento */
+    top: 37%;
+    transform: translateY(-50%);
+    color: #333;
+    font-size: 1rem;
+}
+
+.filtro-opcoes {
+    margin-bottom: 1rem;
+}
+
+.filtro-opcoes label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.filtro-opcoes select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Estilo do botão Filtrar */
+.btn-filtrar {
+    background-color: #ffcc00; /* Cor de fundo do botão (verde) */
+    color: white; /* Cor da letra (branca) */
+    padding: 0.75rem 1.5rem; /* Espaçamento interno do botão */
+    font-size: 1rem; /* Tamanho da fonte */
+    border: none; /* Remover borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Indica que é clicável */
+    margin-top: 1.5rem; /* Espaço acima do botão */
+    width: 100%; /* O botão ocupa toda a largura disponível */
+    transition: background-color 0.3s; /* Transição suave para mudança de cor */
+}
+
+.btn-filtrar:hover {
+    background-color: #f1b501; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo da seção de partituras */
+.partituras {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* duas colunas */
+    gap: 2rem;
+    width: 100%;
+    margin-left: 1%; /* Para dar espaço ao menu fixo */
+}
+
+.partitura-card {
+    width: 550px; /* Ajuste conforme necessário */
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagem-container {
+    width: 100%; /* Tamanho máximo dentro do card */
+    height: 250px; /* Altura fixa para consistência */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.imagem-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ajusta a imagem para caber sem distorção */
+}
+
+.partitura-card:hover {
+    transform: scale(1.05);
+}
+
+.partitura-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.partitura-card h3, 
+.partitura-card p, 
+.partitura-card button {
+    margin: 0.5rem 0;
+}
+
+.partitura-card button {
+    padding: 0.5rem 1rem;
+    background-color: #ffcc00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.partitura-card button:hover {
+    background-color: #f1b501;
+}
+.btn-ver{
+    text-decoration: none;
+    color: white;
+    font-size: bold;
+}
+
+
+@media (max-width: 1475px){
+    .partituras {
+        grid-template-columns: repeat(2, 1fr); /* Mantém duas colunas */
+        gap: 2rem;
+    }
+
+    .partitura-card {
+        max-width: 500px; /* Reduz o tamanho máximo do cartão de partitura */
+        margin: 0 auto; /* Centraliza os cartões */
+    }
+}
+
+@media (max-width: 1320px){
+    .partituras {
+        grid-template-columns: repeat(2, 1fr); /* Mantém duas colunas */
+        gap: 1.5rem;
+    }
+
+    .partitura-card {
+        max-width: 400px; /* Reduz o tamanho máximo do cartão de partitura */
+        margin: 0 auto; /* Centraliza os cartões */
+    }
+}
+
+@media (max-width: 1125px){
+    .partituras {
+        grid-template-columns: repeat(2, 1fr); /* Mantém duas colunas */
+        gap: 1.5rem;
+    }
+
+    .partitura-card {
+        max-width: 350px; /* Reduz o tamanho máximo do cartão de partitura */
+        margin: 0 auto; /* Centraliza os cartões */
+    }
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .header {
+        padding: 1.3rem 2%;
+        background: rgba(120, 120, 120, 0.2);
+    }
+    
+    .biblioteca-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .filtros {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+
+    .partituras {
+        grid-template-columns: 1fr; /* Exibe as partituras em uma coluna */
+        gap: 1rem;
+    }
+
+    .partitura-card {
+        width: 100%;
+        max-width: none; /* Remove qualquer limite de max-width */
+        margin: 0 auto;
+    }
+
+    .icons{
+        display: inline-flex;
+    }
+
+    #check:checked~.icons #menu-icon{
+        display: none;
+    }
+
+    .icons #close-icon{
+        display: none;
+    }
+
+    #check:checked~.icons #close-icon{
+        display: block;
+    }
+    
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: rgba(120, 120, 120, 0.3);
+        box-shadow: 0 .5rem 1rem rgb(0, 0, 0, .1);
+        overflow: hidden;
+        transition: 0.3s ease;
+    }
+
+    #check:checked~.navbar {
+        height: 17.7rem;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.5rem 0;
+        text-align: center;
+    }
+
+    .navbar a.active{
+        background: none; /* Fundo preto para o item ativo */
+        color: #fff;
+    }
+    
+    .navbar a:hover{
+        background: none; /* Fundo preto para o item ativo */
+        color: #fff;
+    }
+}

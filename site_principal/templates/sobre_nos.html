@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style_sobre.css' %}">
+    <title>Sobre Nós</title>
+</head>
+<body>
+    <!-- Menu Header -->
+    <header class="header">
+        <a href="{% url 'home' %}" class="logo"><img src="{% static 'img/logo_sem_fundo.png' %}" alt=""></a>
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class="uil uil-bars" id="menu-icon"></i>
+            <i class="uil uil-times" id="close-icon"></i>
+        </label>
+        <nav class="navbar">
+            <a href="{% url 'home' %}">Início</a>
+            <a href="" class="active">Sobre Nós</a>
+            <a href="{% url 'carregarbanco' %}">Biblioteca</a>
+            <a href="{% url 'login' %}">Login</a>
+        </nav>
+    </header>
+
+    <!-- Seção Sobre Nós -->
+    <section class="sobre-nos">
+        <h1>Sobre Nós</h1>
+        <div class="sobre-nos-content">
+            <p>
+                Somos um grupo de estudantes com paixão por tecnologia e música, que se uniu para criar uma empresa inovadora no ramo musical. Nosso principal objetivo é oferecer uma plataforma digital acessível, onde músicos de todos os níveis possam encontrar uma vasta biblioteca de partituras. Com essa iniciativa, esperamos contribuir para o aprendizado e aprimoramento musical de forma prática e acessível.
+            </p>
+            <p>
+                Nossa plataforma permite que qualquer partitura disponível na biblioteca tenha seu tom ajustado, oferecendo a músicos a liberdade de adaptar o conteúdo à sua necessidade. Acreditamos que essa flexibilidade será um diferencial para estudantes, profissionais e entusiastas da música que buscam uma experiência personalizada e descomplicada.
+            </p>
+    </section>
+
+    <!-- Seção Nossa Equipe -->
+    <section class="nossa-equipe">
+        <h2>Equipe Symphonia</h2>
+        <div class="equipe-container">
+            <div class="membro">
+                <img src="{% static 'img/perfil.jpg' %}" alt="Membro 1">
+                <h3>Daniel Braga</h3>
+                <p>Front/Back-end</p>
+            </div>
+            <div class="membro">
+                <img src="{% static 'img/perfil.jpg' %}" alt="Membro 2">
+                <h3>Ana Vitória</h3>
+                <p>Designer</p>
+            </div>
+            <div class="membro">
+                <img src="{% static 'img/perfil.jpg' %}" alt="Membro 3">
+                <h3>Willians Marcello</h3>
+                <p>Front/Back-end</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

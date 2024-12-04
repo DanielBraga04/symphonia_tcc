@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style_visualizar.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <title>Visualizar Partitura</title>
+</head>
+<body>
+    <div class="container">
+        <div class="partitura">
+            <img src="{{ partitura.partitura.url }}" alt="Partitura">
+            <a href="{{ partitura.partitura.url }}" download class="download-button"><i class="fas fa-download"></i> Download</a>
+        </div>
+        <div class="info">
+            <p><strong>Nome da Partitura:</strong> {{ partitura.nome }}</p>
+            <p><strong>Clave:</strong> {{ partitura.clave }}</p>
+            <p><strong>Tempo:</strong> {{ partitura.tempo }}</p>
+        </div>
+        <!-- Formulário para enviar a mudança de tom e a imagem da partitura -->
+        <form method="post" action="{% url 'processar_partitura' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="tonalidade">
+                <label for="mudanca_tom">Mudança de Tom:</label>
+                <select id="mudanca_tom" name="mudanca_tom">
+                    <option value="1">Ré maior / Si menor</option>
+                    <option value="-1">Si maior / Sol menor</option>
+                </select>
+                <input type="hidden" name="imagem_id" value="{{ partitura.id }}">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+        <a href="{% url voltar_url %}" class="voltar">Voltar</a>
+    </div>
+</body>
+</html>

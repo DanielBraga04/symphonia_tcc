@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/style_part_final.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <title>Partitura Completa</title>
+</head>
+<body>
+
+    <h1 id="slider-title">Partitura Com Tom Mudado</h1> <!-- Título que altera dinamicamente -->
+
+    <div class="slider_box">
+        <div class="slider_controls">
+            <button class="prev"><i class="fa-solid fa-angle-left"></i></button>
+        </div>
+
+        <div class="container_slider">
+            <div class="slider">
+                <!-- Partitura Final como primeiro slide -->
+                <div class="slide"><img src="{{ imagem_url }}" alt="Partitura Final"></div>
+                <!-- Partitura Original como segundo slide -->
+                <div class="slide"><img src="{{ imagem_original_url }}" alt="Partitura Original"></div>
+            </div>
+        </div>
+
+        <div class="slider_controls">
+            <button class="next"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Botões abaixo do slider -->
+    <div class="button-container">
+        <a href="{% url 'visualizar_partitura_logado' imagem_id %}" class="btn">Voltar para Visualizar Partitura</a>
+        <a href="{{ imagem_url }}" download="Partitura_Final.png" class="btn download-btn"><i class="fas fa-download"></i>Download da Partitura Final</a>
+    </div>
+
+    <script src="{% static 'js/script_part_final.js' %}"></script>
+</body>
+</html>

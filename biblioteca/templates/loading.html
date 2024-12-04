@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processando Partitura</title>
+  <link rel="stylesheet" href="{% static 'css/style_loading.css' %}">
+  <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <!-- Imagem GIF de Loading -->
+    <img src="{% static 'img/loading.gif' %}" alt="Loading..." class="loading-gif">
+    <!-- Texto para alternar mensagens -->
+    <p id="loading-text">Processando Partitura</p>
+  </div>
+
+  <script src="{% static 'js/script_loading.js' %}"></script>
+  <script>
+    // Envia uma requisição AJAX para iniciar o processamento
+    window.onload = function() {
+      fetch("{% url 'processar_rois' %}", {
+          method: "GET",
+          headers: {
+              "X-Requested-With": "XMLHttpRequest"
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === "success") {
+              // Redireciona para a página de visualização após o processamento
+              window.location.href = "{% url 'partitura_final' %}";
+          } else {
+              alert("Erro ao processar a partitura.");
+          }
+      })
+      .catch(error => {
+          console.error("Erro na solicitação AJAX:", error);
+      });
+    };
+  </script>
+</body>
+</html>

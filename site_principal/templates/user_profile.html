@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'css/style_user_profile.css' %}">
+</head>
+<body>
+  <div class="profile-container">
+    <!-- Menu lateral -->
+    <div class="menu">
+      <a href="#" class="active" id="general-tab">Geral <i class="fas fa-user"></i></a>
+      <a href="#" id="partituras-tab">Partituras <i class="fas fa-images"></i></a>
+      <a href="#" id="change-password-tab">Mudar Senha <i class="fas fa-key"></i></a>
+      <a href="{% url 'home_logado' %}">Página Principal <i class="fa-solid fa-arrow-rotate-left"></i></a>
+      <a href="{% url 'logout' %}">Sair <i class="fas fa-sign-out-alt"></i></a>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="content">
+      <!-- Seção Geral -->
+      <div id="general-content" class="section">
+        <h2>Informações Gerais</h2>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="profile-picture">
+          </div>
+          <div><br><br><br>
+            <label for="Username">Username:</label>
+            <input type="text" id="username" name="username" value="{{ user_data.username }}" required>
+          </div>
+          <div>
+            <label for="first-name">Nome:</label>
+            <input type="text" id="first-name" name="first-name" value="{{ user_data.first_name }}" required>
+          </div>
+          <div>
+            <label for="last-name">Sobrenome:</label>
+            <input type="text" id="last-name" name="last-name" value="{{ user_data.last_name }}" required>
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ user_data.email }}" required>
+          </div>
+          <div>
+            <label for="phone">Telefone:</label>
+            <input type="tel" id="phone" name="phone" value="{{ user_data.phone }}" maxlength="15" required>
+          </div>
+          {% if success_message_general %}
+            <p class="success-message">{{ success_message_general }}</p>
+          {% endif %}
+          <input type="submit" value="Salvar Alterações" class="btn-salvar">
+        </form>
+      </div>
+
+      <!-- Seção Mudar Senha -->
+      <div id="change-password-content" class="section" style="display: none;">
+        <h2>Mudança de Senha</h2>
+        <form action="{% url 'perfil' %}" method="POST">
+          {% csrf_token %}
+          <div><br><br><br>
+            <label for="current-password">Senha Atual:</label>
+            <input type="password" id="current-password" name="current-password" required>
+            {% if errors.current_password %}
+                <p class="error-message">{{ errors.current_password }}</p>
+            {% endif %}
+        </div>
+        <div>
+            <label for="new-password">Senha Nova:</label>
+            <input type="password" id="new-password" name="new-password" required>
+            {% if errors.new_password %}
+                <p class="error-message">{{ errors.new_password }}</p>
+            {% endif %}
+        </div>
+        <div>
+            <label for="confirm-password">Repetir Senha:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            {% if errors.confirm_password %}
+                <p class="error-message">{{ errors.confirm_password }}</p>
+            {% endif %}
+            {% if success_message_password %}
+                <p class="success-message">{{ success_message_password }}</p>
+            {% endif %}
+        </div>
+          <input type="submit" value="Salvar Alterações" class="btn-salvar">
+        </form>
+      </div>
+
+
+      <div id="partituras-content" class="section" style="display: none; position: relative">
+        <h2>Partituras</h2><br><br>
+        <a href="{% url 'formulario' %}" class="add-partitura-btn">Adicionar Partitura</a>
+        <div class="card-container">
+          <!-- Cards -->
+          {% for partitura in partituras %}
+          <a href="{% url 'visualizar_partitura_logado' partitura.id %}" class="card">
+            <div class="overlay">
+              <span>Visualizar Partitura</span>
+            </div>
+            <img src="{{ partitura.partitura.url }}" alt="{{ partitura.nome }}">
+          </a>
+          {% empty %}
+            <p>Nenhuma partitura encontrada.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="{% static 'js/script_user_tel_mask.js' %}"></script>
+  <script>
+    const generalTab = document.getElementById('general-tab');
+    const changePasswordTab = document.getElementById('change-password-tab');
+    const partiturasTab = document.getElementById('partituras-tab'); // Aba Partituras
+    const generalContent = document.getElementById('general-content');
+    const changePasswordContent = document.getElementById('change-password-content');
+    const partiturasContent = document.getElementById('partituras-content'); // Conteúdo Partituras
+
+    // Função para alternar entre as abas
+    function switchSection(activeTab, tabs, activeContent, contents) {
+        // Remove 'active' de todas as abas e esconde todos os conteúdos
+        tabs.forEach(tab => tab.classList.remove('active'));
+        contents.forEach(content => (content.style.display = 'none'));
+
+        // Adiciona 'active' à aba atual e mostra o conteúdo correspondente
+        activeTab.classList.add('active');
+        activeContent.style.display = 'block';
+        activeContent.style.animation = 'fadeIn 0.5s ease'; // Aplica animação ao mostrar
+    }
+
+    // Define as abas e conteúdos
+    const tabs = [generalTab, changePasswordTab, partiturasTab];
+    const contents = [generalContent, changePasswordContent, partiturasContent];
+
+    // Define a aba ativa com base no contexto do Django
+    const activeSection = "{{ active_section }}";
+    if (activeSection === "password") {
+        switchSection(changePasswordTab, tabs, changePasswordContent, contents);
+    } else if (activeSection === "general") {
+        switchSection(generalTab, tabs, generalContent, contents);
+    } else {
+        switchSection(partiturasTab, tabs, partiturasContent, contents); // Padrão para partituras
+    }
+
+    // Eventos de clique
+    generalTab.addEventListener('click', () => switchSection(generalTab, tabs, generalContent, contents));
+    changePasswordTab.addEventListener('click', () => switchSection(changePasswordTab, tabs, changePasswordContent, contents));
+    partiturasTab.addEventListener('click', () => switchSection(partiturasTab, tabs, partiturasContent, contents));
+</script>
+</body>
+</html>

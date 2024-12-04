@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 950px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.partitura {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+.partitura img {
+    max-width: 100%;
+    height: auto;
+}
+.download-button {
+    position: absolute;
+    bottom: -55px; /* Espaçamento entre o botão de download e o botão de excluir */
+    right: 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.download-button i {
+    margin-right: 5px;
+}
+.download-button:hover {
+    background-color: #218838;
+}
+.info {
+    margin: 20px 0;
+}
+.info p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+.tonalidade {
+    margin: 20px 0;
+}
+.tonalidade select,
+.tonalidade button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.tonalidade button {
+    background-color: #F9BC01;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.tonalidade button:hover {
+    background-color: #DBA502;
+}
+.voltar {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    background-color: #F9BC01;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+.voltar:hover {
+    background-color: #DBA502;
+}
+/* Botão de Excluir */
+.delete-form {
+    position: absolute;
+    bottom: -105px; /* Ajusta a posição para ficar logo abaixo do botão de download */
+    right: 20px;
+}
+
+.delete-button {
+    background-color: #dc3545; /* Vermelho para indicar exclusão */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button i {
+    margin-right: 5px;
+}
+
+.delete-button:hover {
+    background-color: #c82333; /* Tom mais escuro ao passar o mouse */
+}

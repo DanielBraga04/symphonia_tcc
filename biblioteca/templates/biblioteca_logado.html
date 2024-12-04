@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style_biblioteca.css' %}">
+    <title>Biblioteca</title>
+</head>
+<body>
+    <header class="header">
+        <a href="" class="logo"><img src="{% static 'img/logo_sem_fundo.png' %}" alt="Logo"></a>
+
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class="uil uil-bars" id="menu-icon"></i>
+            <i class="uil uil-times" id="close-icon"></i>
+        </label>
+
+        <nav class="navbar">
+            <a href="{% url 'home_logado' %}">Início</a>
+            <a href="{% url 'sobre-nos_logado' %}">Sobre Nós</a>
+            <a href="" class="active">Biblioteca</a>
+            <a href="{% url 'perfil' %}">Minha Conta</a>
+        </nav>
+    </header>
+
+    <div class="biblioteca-container">
+        <!-- Menu de Filtros -->
+        <aside class="filtros">
+            <h2 class="title">Filtros</h2>
+            <form action="{% url 'carregarbanco' %}" method="GET">
+            <div class="input-container">
+                <input type="text" placeholder="Pesquisar..." name="q" placeholder="Pesquisar" value="{{ request.GET.q }}">
+                <i class="uil uil-search"></i>
+            </div>
+            <div class="filtro-opcoes">
+                <label for="clave">Clave</label>
+                <select id="clave" name="clave">
+                    <option value="">Todos</option>
+                    <option value="Sol" {% if filtro_clave == "SOL" %}selected{% endif %}>SOL</option>
+                    <option value="Fa" {% if filtro_clave == "FÁ" %}selected{% endif %}>FÁ</option>
+                    <option value="Do" {% if filtro_clave == "DÓ" %}selected{% endif %}>DÓ</option>
+                </select>
+            </div>
+            <div class="filtro-opcoes">
+                <label for="tempo">Tempo</label>
+                <select id="tempo" name="tempo">
+                    <option value="">Todos</option>
+                    <option value="2/2" {% if filtro_tempo == "2/2" %}selected{% endif %}>2/2</option>
+                    <option value="2/4" {% if filtro_tempo == "2/4" %}selected{% endif %}>2/4</option>
+                    <option value="3/4" {% if filtro_tempo == "3/4" %}selected{% endif %}>3/4</option>
+                    <option value="4/4" {% if filtro_tempo == "4/4" %}selected{% endif %}>4/4 ou C</option>
+                </select>
+                <input type="submit" value="Filtrar" class="btn-filtrar">
+            </div>
+            </form>
+        </aside>
+        <!-- Seção de Partituras -->
+        <section class="partituras">
+            {% for item in partitura %}
+            <div class="partitura-card">
+                <div class="imagem-container">
+                    {% if item.partitura %}
+                    <img src="{{ item.partitura.url }}" alt="#">
+                    {% endif %}
+                </div>
+                <h3>{{ item.nome }}</h3>
+                <p>Clave: {{ item.clave }}</p>
+                <p>Tempo: {{ item.tempo }}</p>
+                <button><a href="{% url 'visualizar_partitura' item.id %}" class="btn-ver">Ver Partitura</a></button>
+            </div>
+            {% empty %}
+            <li>Nenhuma partitura encontrada.</li>
+            {% endfor %}
+            <!-- Adicione mais partituras conforme necessário -->
+        </section>
+    </div>
+</body>
+</html>

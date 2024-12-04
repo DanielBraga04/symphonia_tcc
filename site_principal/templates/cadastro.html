@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <!-- ===== Icon Head ==== -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="{% static 'css/style_cadastro.css' %}" />
+    <title>Cadastro</title>
+  </head>
+  <body>
+    <div class="container">
+      <a href="{% url 'home' %}"><i class="uil uil-times"></i></a>
+      <div class="forms">
+        <div class="form cadastro">
+          <span class="title">Cadastro</span>
+          <form action="{% url 'cadastro' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-field">
+              <input type="text" placeholder="Digite seu Username" name="username" required />
+              <i class="uil uil-user"></i>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Digite seu nome" name="first-name" required />
+              <i class="uil uil-user"></i>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Digite seu sobrenome" name="last-name" required />
+              <i class="uil uil-user"></i>
+            </div>
+            <div class="input-field">
+              <input type="text" id="email" placeholder="Digite seu email" name="email" required />
+              <i class="uil uil-envelope icon"></i>
+            </div>
+            <div class="input-field">
+              <input type="password" class="password" placeholder="Digite sua senha" name="password" required />
+              <i class="uil uil-lock icon"></i>
+              <i class="uil uil-eye-slash showHidePw"></i>
+            </div>
+            <div class="input-field">
+              <input type="text" id="telefone" placeholder="Digite seu telefone" name="phone" maxlength="15" required />
+              <i class="uil uil-phone"></i>
+            </div>
+            <div class="input-field button">
+              <input type="submit" value="Cadastrar" />
+            </div>
+          </form>
+          <div class="login-signup">
+            <span class="text"
+              >Já tem conta?
+                <a href="{% url 'login' %}" class="text login-link">Logar</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/script_login_cadastro.js' %}"></script>
+  </body>
+</html>

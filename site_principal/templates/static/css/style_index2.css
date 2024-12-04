@@ -1,0 +1,173 @@
+/* Estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fundo e layout da página */
+body {
+    background-image: url('../img/fundo_index.png'); /* Caminho para a imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    color: #333;
+    overflow: hidden;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 50px;
+    padding-right: 50px;
+    height: 100vh;
+    color: #333;
+}
+
+header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1.3rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.header img{
+    width: 150px
+}
+
+.navbar a{
+    font-size: 1.15rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 2.5rem;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+
+.navbar a.active{
+    background-color: #333; /* Fundo preto para o item ativo */
+    color: #fff;
+}
+
+.navbar a:hover{
+    background-color: #333; /* Fundo preto para o item ativo */
+    color: #fff;
+}
+
+.icons{
+    position: absolute;
+    right: 5%;
+    font-size: 2.6rem;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display: none;
+}
+
+/* Seção do conteúdo principal */
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    max-width: 1200px;
+    margin: auto;
+    margin-left: auto; /* Centraliza horizontalmente */
+    margin-right: 50px; /* Ajuste esse valor para a distância desejada */
+}
+
+.text-section {
+    max-width: 500px;
+    margin-right: 0; /* Alinhado à direita */
+    text-align: center; /* Centraliza o texto */
+}
+
+.text-section h1 {
+    font-size: 50px;
+    line-height: 1.2;
+    font-weight: 900;
+}
+
+.text-section h1 span {
+    font-size: 80px;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 2px #000; /* Apenas o contorno da palavra "MÚSICA" */
+}
+
+.text-section p {
+    font-size: 18px;
+    margin-top: 20px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.button-experiment {
+    background-color: #FFC107;
+    color: white;
+    padding: 15px 30px;
+    border: 3px solid #333; /* Contorno preto */
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 30px; /* Mais arredondado */
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.button-experiment:hover {
+    background-color: #333;
+    color: #FFC107;
+}
+
+.experiment-a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+/* Estilo dos ícones de redes sociais */
+.social-icons {
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    background-color: #FFC107;
+}
+
+/*BREAKPOINTS*/
+@media (max-width:992px){
+    .header{
+        padding: 1.3rem 2%;
+    }
+}

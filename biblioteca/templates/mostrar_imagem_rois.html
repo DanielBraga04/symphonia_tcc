@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagem com ROIs Selecionados</title>
+</head>
+<body>
+    <h1>Imagem com ROIs Selecionados</h1>
+
+    {% if imagem_url %}
+        <img src="{{ imagem_url }}" alt="Imagem com ROIs Selecionados" />
+    {% else %}
+        <p>Imagem com ROIs não encontrada.</p>
+    {% endif %}
+
+    <a href="{% url 'selecionar_notas' %}">Voltar para Seleção de Notas</a>
+</body>
+</html>

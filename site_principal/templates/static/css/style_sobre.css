@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.header{
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1.3rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background-color: #fccd42;
+}
+
+.header img{
+    width: 150px
+}
+
+.navbar a{
+    font-size: 1.15rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 2.5rem;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+
+.navbar a.active{
+    background-color: #333; /* Fundo preto para o item ativo */
+    color: #fff;
+}
+
+.navbar a:hover{
+    background-color: #333; /* Fundo preto para o item ativo */
+    color: #fff;
+}
+
+.icons{
+    position: absolute;
+    right: 5%;
+    font-size: 2.6rem;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display: none;
+}
+
+/* Estilo para a seção "Sobre Nós" */
+.sobre-nos {
+    padding: 8rem 10rem;
+    background-color: #fccd42;
+    text-align: left; /* Alinhamento à esquerda */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Mantém os itens alinhados à esquerda */
+    margin-bottom: 5rem;
+}
+
+.sobre-nos h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    transform: translateY(-80px);
+}
+
+.sobre-nos-content {
+    display: flex;
+    gap: 2rem; /* Espaço entre os parágrafos */
+}
+
+.sobre-nos p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    max-width: 550px;
+    line-height: 1.6;
+    margin-top: -3rem;
+}
+
+/* Estilo para a seção "Nossa Equipe" */
+.nossa-equipe {
+    padding: 5rem 2rem;
+    text-align: center;
+    background-color: #fff;
+}
+
+.nossa-equipe h2 {
+    font-size: 2.8rem;
+    margin-bottom: 4rem;
+    color: #333;
+    text-align: left;
+    margin-left: 14rem;
+}
+
+.equipe-container {
+    display: flex;
+    justify-content: center;
+    gap: 11rem;
+    flex-wrap: wrap;
+}
+
+.membro {
+    max-width: 200px;
+    text-align: center;
+}
+
+.membro img {
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.membro h3 {
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+    color: #333;
+}
+
+.membro p {
+    font-size: 1rem;
+    color: #5a5a5a;
+}
+
+/*BREAKPOINTS*/
+@media (max-width:992px){
+    .header{
+        padding: 1.3rem 2%;
+    }
+}
+
+@media (max-width:795px){
+    .icons{
+        display: inline-flex;
+    }
+
+    #check:checked~.icons #menu-icon{
+        display: none;
+    }
+
+    .icons #close-icon{
+        display: none;
+    }
+
+    #check:checked~.icons #close-icon{
+        display: block;
+    }
+
+    .header{
+        background: rgb(120, 120, 120, 0.2);
+    }
+
+    .navbar{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: rgba(120, 120, 120, 0.3);
+        box-shadow: 0 .5rem 1rem rgb(0, 0, 0, .1);
+        overflow: hidden;
+        transition: 0.3s ease;
+    }
+
+    #check:checked~.navbar{
+        height: 17.7rem;
+    }
+
+    .navbar a{
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.5rem 0;
+        text-align: center;
+    }
+
+    .navbar a.active{
+        background: none; /* Fundo preto para o item ativo */
+        color: #fff;
+    }
+    
+    .navbar a:hover{
+        background: none; /* Fundo preto para o item ativo */
+        color: #fff;
+    }
+
+}

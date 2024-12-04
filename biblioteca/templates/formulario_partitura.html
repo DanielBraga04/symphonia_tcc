@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregar e Exibir Imagem</title>
+    <link rel="stylesheet" href="{% static 'css/style_form_partitura.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <form style="display: flex; width: 100%;" action="{% url 'formulario' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="image-container">
+                <h1>Carregar e Exibir Imagem</h1>
+                <input type="file" id="fileInput" name="partitura" accept="image/*">
+                <div class="info-text">Extensões aceitas: PNG, JPG, JPEG, etc...</div>
+                <img id="image" src="#" alt="Imagem carregada">
+            </div>
+            <div class="form-container">
+                <label for="nomePartitura">Nome da partitura</label>
+                <input type="text" id="nomePartitura" name="nomePartitura" placeholder="Digite o nome da partitura">
+                <label for="clave">Qual é a clave?</label>
+                <select id="clave" name="clave">
+                    <option value="Sol">Sol</option>
+                    <option value="Fa">Fá</option>
+                    <option value="Do">Dó</option>
+                </select>
+                <label for="tempo">Qual é o tempo/compasso?</label>
+                <select id="tempo" name="tempo">
+                    <option value="2/2">2/2</option>
+                    <option value="2/4">2/4</option>
+                    <option value="3/4">3/4</option>
+                    <option value="4/4">4/4 ou C</option>
+                </select>
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{% static 'js/script_form_partitura.js' %}"></script>
+</body>
+</html>

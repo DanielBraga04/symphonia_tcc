@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4; /* Cor de fundo leve */
+}
+
+.container {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: white; /* Fundo branco para o container */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    text-align: center; /* Centraliza o texto */
+}
+
+canvas {
+    border: 1px solid black; /* Borda da imagem */
+    cursor: crosshair; /* Cursor de seleção */
+    margin-top: 10px; /* Espaçamento acima da imagem */
+}
+
+.warning-message {
+    margin-bottom: 10px; /* Espaçamento abaixo da mensagem */
+    font-weight: bold; /* Destaca o texto */
+    color: #d9534f; /* Cor do texto de aviso */
+}
+
+button {
+    background-color: #F9BC01; /* Cor do botão */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Cantos arredondados */
+    padding: 10px 20px; /* Espaçamento interno */
+    margin-top: 15px;
+    cursor: pointer; /* Cursor pointer */
+    font-size: 16px; /* Tamanho da fonte */
+    transition: background-color 0.3s; /* Transição suave para hover */
+}
+
+button:hover {
+    background-color: #DBA502; /* Cor do botão ao passar o mouse */
+}

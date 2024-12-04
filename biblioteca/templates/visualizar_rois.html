@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar ROIs</title>
+</head>
+<body>
+    <h1>ROIs Selecionados</h1>
+
+    {% if rois %}
+        <div>
+            {% for roi in rois %}
+                <div>
+                    <h3>ROI - X: {{ roi.x }}, Y: {{ roi.y }}, Width: {{ roi.width }}, Height: {{ roi.height }}</h3>
+                    <img src="{{ roi.image }}" alt="ROI" style="border: 1px solid red;"/>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nenhum ROI selecionado.</p>
+    {% endif %}
+
+    <a href="{% url 'selecionar_notas' %}">Voltar para Seleção de Notas</a>
+</body>
+</html>
